@@ -1,0 +1,50 @@
+{>"layouts/master2" /}
+{<body}
+
+<div id="wrapper">
+
+    {>"partials/slidebar" /}
+
+    <div id="page-content-wrapper">
+        {>"partials/navbar" /}
+        <div class="container-fluid main_body">
+			<div class="ul_links">
+	            <ul>
+	                <li><a href="/">Home</a></li> |
+	                <li><a href="/companies">All Companies</a></li>
+	            </ul>
+	        </div>
+
+            <div class="bodyDiv">
+				<h4 style="">Companies</h4>
+				
+                {?data}
+                {#data}
+                    
+                    
+				    <div class="col-xs-12 col-md-6 col-lg-4 companyListDiv">
+                        <a href="/company/company-profile/{._id}">
+                            <img src="/uploads/{.image}>" class="companyListItemLogo">
+
+                            <div class="companyListItemInfo">
+                                <h5 class="">{.name}</h5>
+                                <i class="fa fa-building-o "> {.sector}</i><br>
+                                <i class="fa fa-map-marker "> {.city}, {.country}</i>
+                            </div>
+
+                        </a>
+                    </div>
+			    
+                    {/data}
+          
+                    {:else}
+                    <h1>No hay companias</h1>
+                    {/data}
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+{/body}

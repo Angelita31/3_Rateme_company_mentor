@@ -1,0 +1,62 @@
+{>"layouts/master2" /}
+{<body}
+
+
+<div id="wrapper">
+
+  {>"partials/slidebar" /}
+
+
+  <div id="page-content-wrapper">
+      {>"partials/navbar" /}
+        <div class="container-fluid main_body">
+			<div class="ul_links">
+	            <ul>
+	                <li><a href="/">Home</a></li> |
+	                <li><a href="/companies">Company</a></li> |
+	                <li><a href="#">Employees</a></li>
+	            </ul>
+	        </div>
+
+            <div class="bodyDiv">
+				<h4 style="">Company Employees</h4>
+            
+                <table class="table table-bordered">
+                   <thead>
+                       <tr>
+                           <th>Fullname</th>
+                           <th>Position</th>
+                           <th></th>
+                       </tr>
+                   </thead>
+                   
+                   <tbody>
+                {?data.employees}
+                {#data.employees}        
+                               <tr>
+                                   <td>{.employeeFullname} </td>
+                                   <td>{.employeeRole}</td>
+                                   <td><a href="/message/{.employeeId}" class="btn btn-primary">Send Message</a></td>
+                               </tr>
+                           
+                          {/data.employees}
+                          {:else}
+                           <tr>
+                               <td><p>No registered employee yet</p></td>
+                           </tr>
+                           {/data.employees}
+                   </tbody>
+                    
+                </table>
+	            
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{/body}
+
+
+
+

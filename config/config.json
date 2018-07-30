@@ -1,0 +1,118 @@
+{
+
+    
+    "express": {
+        "view cache": false,
+        "view engine": "js",
+        "views": "path:./.build/templates"
+    },
+    
+
+    
+    "view engines": {
+        "js": {
+            "module": "makara",
+            "renderer": {
+                "method": "js",
+                "arguments": [
+                    { "cache": true, "helpers": "config:dust.helpers" }
+                ]
+            }
+        }
+    },
+
+    "dust": {
+        "helpers": [
+    
+            "dust-makara-helpers",
+            "dustjs-helpers"
+    
+        ]
+    },
+    
+
+    
+    "i18n": {
+        "contentPath": "path:./locales",
+        "fallback": "es-CH"
+    },
+
+    "databaseConfig": {
+        "host": "localhost",
+        "database": "ARateme"
+    },
+    
+
+    "specialization": {
+    },
+
+    "middleware": {
+
+        
+        "makara": {
+            "priority": 100,
+            "enabled": true,
+            "module": {
+                "name": "makara",
+                "arguments": [
+                    {
+                        "i18n": "config:i18n",
+                        "specialization": "config:specialization"
+                    }
+                ]
+            }
+        },
+
+
+        "static": {
+            "module": {
+                "arguments": [ "path:./.build" ]
+            }
+        },
+    
+        "appsec": {
+            "enabled": true,
+            "module": {
+              "arguments": [{
+                "xframe": "SAMEORIGIN",
+                "p3p": false,
+                "csp": false,
+                "csrf": false
+              }]
+            }
+        },
+        "csrf": {
+            "enabled": true,
+            "priority": 111,
+            "route": "/((?!(company/upload|review)))*",
+            "module": {
+                "name": "lusca",
+                "method": "csrf",
+                "arguments": [ {} ]
+            }
+        },
+        "urlencoded": {
+            "enabled": true,
+            "priority": 70,
+            "module": {
+                "name": "body-parser",
+                "method": "urlencoded",
+                "arguments": [{ "extended": true, "limit": "100mb" }]
+            }
+        },
+        "router": {
+            "module": {
+                "arguments": [{ "directory": "path:./routes/" }]
+            }
+        },
+
+        "locale": {
+            "priority": 95,
+            "enabled": true,
+            "module": {
+                "name": "path:./lib/middleware/locale"
+            }
+        }
+
+    }
+}
